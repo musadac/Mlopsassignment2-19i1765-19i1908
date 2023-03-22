@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Live Dashboard</title>
+	<style type="text/css">
+		table, th, td {
+			border: 1px solid black;
+			border-collapse: collapse;
+			padding: 5px;
+			text-align: left;
+		}
+	</style>
+</head>
+<body>
+	<h1>Live Dashboard</h1>
+	
+	<h2>Top 10 Labels</h2>
+	<table>
+		<tr>
+			<th>Label</th>
+			<th>Count</th>
+		</tr>
+		{% for label, count in top_labels.items() %}
+		<tr>
+			<td>{{ label }}</td>
+			<td>{{ count }}</td>
+		</tr>
+		{% endfor %}
+	</table>
+	
+	<h2>Model Metrics</h2>
+	<p>Accuracy: {{ accuracy }}</p>
+	<p>F1 Score: {{ f1 }}</p>
+	
+	<h2>Live Data</h2>
+	<table>
+		<tr>
+			<th>Text</th>
+			<th>Label</th>
+		</tr>
+		{% for index, row in data.iterrows() %}
+		<tr>
+			<td>{{ row['text'] }}</td>
+			<td>{{ row['label'] }}</td>
+		</tr>
+		{% endfor %}
+	</table>
+	
+	<form id="predict-form">
+		<label for="text-input">Text Input:</label>
+		<input type="text" id="text-input" name="text">
+		<button type="submit">Predict</button>
+	</form>
+	
+	<div id="prediction-result"></div>
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		// Submit the input text for prediction
+		$('#predict-form').submit(function(event) {
+			event.preventDefault();
+			
+			var inputText = $('#text-input').val();
+			
+			$.ajax({
+				type: 'POST',
+				url: '/predict',
+				data: JSON.stringify({'text': inputText}),
+				contentType: 'application/json',
+				success: function(response) {
+					$('#prediction-result').html('Prediction: ' + response.label);
+				},
+				error: function(error) {
+					console.log(error);
+				}
+			});
+		});
+	</script>
+	<script>
+		setInterval(function(){
+			location.reload();
+		}, 30000);
+		</script>
+</body>
+</html>
