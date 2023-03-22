@@ -36,9 +36,9 @@ model = AutoModelForSequenceClassification.from_pretrained(MODEL)
 
 reddit = praw.Reddit(client_id='iGBXSi7IenvrAFA2TDYVSg',
                      client_secret='_ine6fSfIVjBFaGDiFpXWaKVmFEqNQ',
-                     password='Mus@dac20.',
+                     password='',
                      user_agent='https',
-                     username='musadac')
+                     username='')
 
 # Set the subreddit you want to scrape data from
 subreddit = reddit.subreddit('world')
