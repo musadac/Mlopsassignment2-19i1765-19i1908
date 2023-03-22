@@ -5,9 +5,9 @@ import os
 
 reddit = praw.Reddit(client_id='iGBXSi7IenvrAFA2TDYVSg',
                      client_secret='_ine6fSfIVjBFaGDiFpXWaKVmFEqNQ',
-                     password='Mus@dac20.',
+                     password='',
                      user_agent='https',
-                     username='musadac')
+                     username='')
 
 
 
