@@ -10,7 +10,6 @@ from transformers import AutoTokenizer, AutoConfig
 import numpy as np
 from scipy.special import softmax
 from flask import Flask, render_template, request, jsonify
-import torch
 import numpy as np
 import pandas as pd
 from sklearn.metrics import accuracy_score, f1_score
